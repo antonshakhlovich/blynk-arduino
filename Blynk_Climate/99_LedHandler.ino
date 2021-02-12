@@ -11,3 +11,13 @@ int ledSetup() {
   digitalWrite(OUTPUT_LED, HIGH);
   return OUTPUT_LED;
 }
+
+void blinkLed() {
+  for(int i = 0; i < 5; i++) {
+    delay(100);
+    digitalWrite(OUTPUT_LED, HIGH);
+    delay(100);
+    digitalWrite(OUTPUT_LED, LOW);
+  }
+  Blynk.syncVirtual(V2);
+}

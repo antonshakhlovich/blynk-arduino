@@ -12,4 +12,5 @@ void connect() {
   }
   Serial.println("WiFi connected"); 
   Blynk.begin(auth, ssid, pass);
+  blinkLed();
 }
