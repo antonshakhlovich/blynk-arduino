@@ -19,5 +19,5 @@ void setup() {
 void loop()
 {
   Blynk.run();
-  timer.run(); 
+  timer.run();
 }

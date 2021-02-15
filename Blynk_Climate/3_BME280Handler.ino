@@ -17,16 +17,19 @@ void bme280Setup() {
   Serial.print("BME Serial ID:");
   Serial.println(bme.sensorID(),16);
   blinkLed();
-  timer.setInterval(3000, printValues);
+  timer.setInterval(10000, printValues);
+  timer.setInterval(10000, sendValuesBlynk);
 }
 
 
-void bme280Values(int values[]) {
+void bme280Values(float values[]) {
   values[0] = bme.readTemperature();
-  values[1] = bme.readPressure() / 100.0F;
-  values[2] = bme.readAltitude(SEALEVELPRESSURE_HPA);
-  values[3] = bme.readHumidity();
+  values[1] = bme.readHumidity();
+  values[2] = bme.readPressure() / 100.0F;
+  values[3] = bme.readAltitude(SEALEVELPRESSURE_HPA);
 }
+
+
 
 void printValues() {
   Serial.print("Temperature = ");
@@ -47,4 +50,11 @@ void printValues() {
   Serial.println(" %");
 
   Serial.println();
+}
+
+void sendValuesBlynk() {
+  float values[4];
+  bme280Values(values);
+  Blynk.virtualWrite(V0, String(values[0], 1));
+  Blynk.virtualWrite(V1, String(values[1], 1));
 }
