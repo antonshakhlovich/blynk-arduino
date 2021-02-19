@@ -1,6 +1,9 @@
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BME280.h>
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <BlynkSimpleEsp32.h>
+#include <Wire.h>
 
 BlynkTimer timer;
 
@@ -13,6 +16,7 @@ void setup() {
   delay(5000);
   ledSetup();
   bme280Setup();
+  setupCO2();
   connect();
 }
 
